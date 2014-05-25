@@ -6,25 +6,20 @@
 ##      a setter (setinv) which computes (using the solve() function) the inverse
 
 makeCacheMatrix <- function(x = matrix()) {
-#         m <- NULL
-#         set <- function(y) {
-#                 x <<- y
-#                 m <<- NULL
-#         }
-#         get <- function() x
-#         setmean <- function(mean) m <<- mean
-#         getmean <- function() m
-#         list(set = set, get = get,
-#              setmean = setmean,
-#              getmean = getmean)
+        #initialize the variable we will use to store the inverse
         inv <- NULL
+        #Create the setter function to store the matrix and initialize the variable used to store the inverse
         set <- function(y) {
                 x <<- y
                 inv <<- NULL
         }
+        #Create the getter function to return the matrix
         get <- function() x
+        #Create the setter function which stores the inverse
         setinv <- function(solve) inv <<- solve
+        #Create the getter function which returns the inverse
         getinv <- function() inv
+        #Finally, return the list of functions
         list(set = set, get = get,
              setinv = setinv,
              getinv = getinv)
@@ -37,17 +32,9 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-#         m <- x$getmean()
-#         if(!is.null(m)) {
-#                 message("getting cached data")
-#                 return(m)
-#         }
-#         data <- x$get()
-#         m <- mean(data, ...)
-#         x$setmean(m)
-#         m
+        #First, retrieve the current value of the inverse using our getter
         inv <- x$getinv()
-        #First, check to see if the value is null
+        #Next, check to see if the value is null
         if(!is.null(inv)) {
                 #If we have a value, just return the value along with a message
                 message("getting cached data")
